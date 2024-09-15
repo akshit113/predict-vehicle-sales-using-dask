@@ -5,4 +5,4 @@
 \margl1440\margr1440\vieww11520\viewh8400\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
-\f0\fs24 \cf0 This project aims to analyse vehicle sales data using Dask dataframes and evaluate various regression models such as Facebook Prophet, ARIMA, SARIMA, and LSTM Networks }
+\f0\fs24 \cf0 The project aims to analyse vehicle sales data using Dask dataframes and evaluate various regression models such as Facebook Prophet, ARIMA, SARIMA, and LSTM Networks }
