@@ -1,6 +1,9 @@
+import warnings
+
 from dask.dataframe import read_csv
 import pandas as pd
 import numpy as np
+from dask.dataframe.core import meta_warning
 
 """
 Dataset info: 
@@ -31,12 +34,14 @@ def import_data():
 
 def explore_distinct_values(df, cols):
     print('**************************************************************')
-    print("Get Distinct Values...")
+    print("Get Distinct Values...\n")
+
     for col in cols:
-        unique_values = list(set(df[col].unique().compute()))
-        print(f'For column {col}, ')
-        vals = sorted([str(e) for e in unique_values])
-        print("------>", ", ".join(vals))
+        df[col] = df[col].apply(lambda x: str(x).capitalize(), meta=(col, 'string'))
+        print(f'\nFor column {col}, ')
+        unique_values = sorted(set(df[col].unique().compute()))
+        print(f'{len(unique_values)} values encountered')
+        print("------>", ", ".join(unique_values))
         print('----------------------------------------------------------')
     print('done')
 
@@ -51,7 +56,7 @@ def perform_eda(df):
     print("eda done")
 
     # find distinct values
-    cols = ['year', 'make', 'model', 'trim', 'body', 'transmission', 'state', 'color',
+    cols = ['make', 'model', 'trim', 'body', 'transmission', 'state', 'color',
             'interior']
     explore_distinct_values(df, cols)
 
