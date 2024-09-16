@@ -60,6 +60,7 @@ def main():
     set_display()
     df = import_data()
     perform_eda(df)
+    ### Next step - remove irrelevant columns with garbage values, missing values, ---, etc
 
     print("test")
     print("Program Execution Complete..")
