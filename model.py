@@ -26,14 +26,41 @@ def import_data():
                                         'mmr': 'float64',
                                         'odometer': 'float64',
                                         'sellingprice': 'float64'})
-    print(len(df))
-    print(list(df.columns))
     return df
+
+
+def explore_distinct_values(df, cols):
+    print('**************************************************************')
+    print("Get Distinct Values...")
+    for col in cols:
+        unique_values = list(set(df[col].unique().compute()))
+        print(f'For column {col}, ')
+        vals = sorted([str(e) for e in unique_values])
+        print("------>", ", ".join(vals))
+        print('----------------------------------------------------------')
+    print('done')
+
+
+def perform_eda(df):
+    print(df.info())
+    print(f'The columns are - ', ", ".join(df.columns))
+    print("eda done")
+
+    print(df.dtypes)
+
+    print("eda done")
+
+    # find distinct values
+    cols = ['year', 'make', 'model', 'trim', 'body', 'transmission', 'state', 'color',
+            'interior']
+    explore_distinct_values(df, cols)
 
 
 def main():
     set_display()
     df = import_data()
+    perform_eda(df)
+
     print("test")
     print("Program Execution Complete..")
 
