@@ -37,13 +37,35 @@ def explore_distinct_values(df, cols):
     print("Get Distinct Values...\n")
 
     for col in cols:
-        df[col] = df[col].apply(lambda x: str(x).capitalize(), meta=(col, 'string'))
+        df[col] = df[col].apply(lambda x: str(x).lower(), meta=(col, 'string'))
         print(f'\nFor column {col}, ')
         unique_values = sorted(set(df[col].unique().compute()))
         print(f'{len(unique_values)} values encountered')
         print("------>", ", ".join(unique_values))
         print('----------------------------------------------------------')
     print('done')
+
+
+def replace_values(df):
+    rep_dict = {
+        'chev truck': 'chevrolet',
+        'dodge tk': 'dodge',
+        'ford tk': 'ford',
+        'ford truck': 'ford',
+        'gmc truck': 'gmc',
+        'hyundai tk': 'hyundai',
+        'landrover': 'land rover',
+        'mazda tk': 'mazda',
+        'mercedes-b': 'mercedes',
+        'Mercedes-benz': 'mercedes',
+        'vw': 'volkswagen'
+
+    }
+
+    for key, value in rep_dict.items():
+        df = df.replace(key, value)
+    print((list(df['make'].unique().compute())))
+    return df
 
 
 def perform_eda(df):
@@ -64,6 +86,7 @@ def perform_eda(df):
 def main():
     set_display()
     df = import_data()
+    df = replace_values(df)
     perform_eda(df)
     ### Next step - remove irrelevant columns with garbage values, missing values, ---, etc
 
